@@ -8,6 +8,26 @@
 
 import Foundation
 
+struct Root: Decodable {
+    
+    let body: [Product]
+    
+    enum CodingKeys: String, CodingKey {
+        case body
+    }
+    
+}
+
 struct Product: Decodable {
-    <#fields#>
+    
+    let thumbnail: String
+    let id: Int
+    let seller: String
+    let title: String
+    
+    enum CodingKeys: String, CodingKey {
+        case thumbnail = "thumbnail_520"
+        case id, seller, title
+    }
+    
 }

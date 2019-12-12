@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Alamofire
+import Kingfisher
 import SnapKit
 
 class ProductListController: UIViewController {
-    
+
     private let cellId = "cellId"
     private let headerId = "headerId"
     private let footerId = "footerId"
@@ -31,11 +33,15 @@ class ProductListController: UIViewController {
         return imgView
     }()
     
+    // MARK:- View Did Load
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupNavi()
         self.setupCollectionView()
         self.setupUIComponents()
+        
+        self.fetchProducts()
+        
         
     }
     
@@ -66,20 +72,44 @@ class ProductListController: UIViewController {
         }
     }
     
+    
+    let productsService: ProductsServiceType = ProductsService()
+    var fetchedProducts: [Product] = []
+    
+    // MARK:- Networks Methods
+    fileprivate func fetchProducts(since: Int = 1) {
+        
+        productsService.fetchProducts(since: since) { (result) in
+            switch result {
+            case .success(let value):
+                self.fetchedProducts = value.body
+                self.collectionView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+    }
+    
 }
 
 extension ProductListController: UICollectionViewDataSource {
     
     // Handle Collection View Number Of Items In Section
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 18
+        return self.fetchedProducts.count
     }
     
     // Handle Collection View Cell For Item AT
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ProductListCell
-        cell.backgroundColor = .yellow
+        cell.productNameTitle.text = self.fetchedProducts[indexPath.row].title
+        cell.sellerNameTitle.text = self.fetchedProducts[indexPath.row].seller
+        let imagePath = self.fetchedProducts[indexPath.row].thumbnail
+        let imageUrl = URL(string: imagePath)!
+        cell.photoImageView.kf.setImage(with: imageUrl)
+
         return cell
     }
     

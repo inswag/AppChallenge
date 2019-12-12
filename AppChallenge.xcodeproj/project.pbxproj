@@ -11,6 +11,7 @@
 		F92A77C523A090C300033261 /* ProductCustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92A77C423A090C300033261 /* ProductCustomFlowLayout.swift */; };
 		F92A77C823A0BDD600033261 /* ProductDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92A77C723A0BDD600033261 /* ProductDetailController.swift */; };
 		F9785B9823A1DA2500DA3BBE /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9785B9723A1DA2500DA3BBE /* Products.swift */; };
+		F9785B9B23A1E0E400DA3BBE /* ProductsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9785B9A23A1E0E400DA3BBE /* ProductsService.swift */; };
 		F9F308E0239F7BCF002E6F11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F308DF239F7BCF002E6F11 /* AppDelegate.swift */; };
 		F9F308E2239F7BCF002E6F11 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F308E1239F7BCF002E6F11 /* SceneDelegate.swift */; };
 		F9F308E4239F7BCF002E6F11 /* ProductListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F308E3239F7BCF002E6F11 /* ProductListController.swift */; };
@@ -30,6 +31,7 @@
 		F92A77C423A090C300033261 /* ProductCustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCustomFlowLayout.swift; sourceTree = "<group>"; };
 		F92A77C723A0BDD600033261 /* ProductDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailController.swift; sourceTree = "<group>"; };
 		F9785B9723A1DA2500DA3BBE /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
+		F9785B9A23A1E0E400DA3BBE /* ProductsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsService.swift; sourceTree = "<group>"; };
 		F9F308DC239F7BCF002E6F11 /* AppChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9F308DF239F7BCF002E6F11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9F308E1239F7BCF002E6F11 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,31 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		F9785B9923A1E0CC00DA3BBE /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				F9785B9A23A1E0E400DA3BBE /* ProductsService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		F9785B9C23A1E2C200DA3BBE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F9F308E3239F7BCF002E6F11 /* ProductListController.swift */,
+				F92A77C723A0BDD600033261 /* ProductDetailController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		F9785B9D23A1E2D200DA3BBE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F9F308FB239FAB51002E6F11 /* Tools.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		F9F308D3239F7BCE002E6F11 = {
 			isa = PBXGroup;
 			children = (
@@ -112,18 +139,18 @@
 		F9F308DE239F7BCF002E6F11 /* AppChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				F9785B9D23A1E2D200DA3BBE /* Extensions */,
+				F9785B9923A1E0CC00DA3BBE /* Service */,
 				F9785B9623A1D9E000DA3BBE /* Model */,
+				F9785B9C23A1E2C200DA3BBE /* Controllers */,
 				F9F308DF239F7BCF002E6F11 /* AppDelegate.swift */,
 				F9F308E1239F7BCF002E6F11 /* SceneDelegate.swift */,
-				F9F308E3239F7BCF002E6F11 /* ProductListController.swift */,
-				F92A77C723A0BDD600033261 /* ProductDetailController.swift */,
 				F9F308E5239F7BCF002E6F11 /* Main.storyboard */,
 				F9F308EA239F7BD4002E6F11 /* LaunchScreen.storyboard */,
 				F9F308ED239F7BD4002E6F11 /* Info.plist */,
 				F9F308F7239F862F002E6F11 /* ProductListFooter.swift */,
 				F9F308F9239FAA5C002E6F11 /* ProductListCell.swift */,
 				F9F308E8239F7BD4002E6F11 /* Assets.xcassets */,
-				F9F308FB239FAB51002E6F11 /* Tools.swift */,
 			);
 			path = AppChallenge;
 			sourceTree = "<group>";
@@ -253,6 +280,7 @@
 				F92A77C823A0BDD600033261 /* ProductDetailController.swift in Sources */,
 				F9F308F6239F8620002E6F11 /* ProductListHeader.swift in Sources */,
 				F9F308FC239FAB51002E6F11 /* Tools.swift in Sources */,
+				F9785B9B23A1E0E400DA3BBE /* ProductsService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
