@@ -21,7 +21,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = ProductListController(collectionViewLayout: UICollectionViewFlowLayout())
+            let productList = ProductListController()
+            let naviController = UINavigationController(rootViewController: productList)
+            
+            window.rootViewController = naviController
             self.window = window
             window.makeKeyAndVisible()
         }
