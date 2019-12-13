@@ -24,8 +24,7 @@ class ProductListCell: UICollectionViewCell {
     
     let productNameTitle: UILabel = {
         let label = UILabel()
-//        label.font = UIFont(name: "NotoSansCJKkr-Black", size: 14.0)!
-        label.font = UIFont(name: "Avenir-Black", size: 14.0)!
+        label.font = UIFont(name: "NotoSansCJKkr-Black", size: 14.0)
         label.text = "ProductName\nProductName"
         label.numberOfLines = 2
         label.textColor = UIColor.rgb(r: 20, g: 20, b: 40)
@@ -34,10 +33,9 @@ class ProductListCell: UICollectionViewCell {
     
     let sellerNameTitle: UILabel = {
         let label = UILabel()
-//        label.font = UIFont(name: "NotoSansCJKkr-Black", size: 14.0)!
-        label.font = UIFont(name: "Avenir-Black", size: 14.0)!
+        label.font = UIFont(name: "NotoSansCJKkr-Bold", size: 14.0)
         label.text = "Seller"
-        label.numberOfLines = 2
+        label.numberOfLines = 1
         label.textColor = UIColor.rgb(r: 171, g: 171, b: 196)
         return label
     }()
@@ -61,14 +59,14 @@ class ProductListCell: UICollectionViewCell {
             m.top.equalTo(self.photoImageView.snp.bottom).offset(4)
             m.leading.equalTo(self.contentView.safeAreaLayoutGuide.snp.leading).offset(8)
             m.trailing.equalTo(self.contentView.safeAreaLayoutGuide.snp.trailing).offset(-8)
-            m.height.equalTo(40)
+//            m.height.equalTo(40)
         }
         
         sellerNameTitle.snp.makeConstraints { (m) in
             m.top.equalTo(self.productNameTitle.snp.bottom)
             m.leading.equalTo(self.contentView.safeAreaLayoutGuide.snp.leading).offset(8)
             m.trailing.equalTo(self.contentView.safeAreaLayoutGuide.snp.trailing).offset(-8)
-            m.height.equalTo(20)
+//            m.height.equalTo(20)
         }
     }
     

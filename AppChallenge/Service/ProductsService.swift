@@ -10,22 +10,12 @@ import Foundation
 import Alamofire
 
 protocol ProductsServiceType {
-    func fetchProducts(since: Int, completion: @escaping (Result<Root>) -> ())
-}
-
-enum API {
-    static let baseURL = "https://2jt4kq01ij.execute-api.ap-northeast-2.amazonaws.com/prod/"
-    static let getProducts = "products?page="
-}
-
-enum Result<T> {
-    case success(T)
-    case failure(Data?, Error)
+    func fetchProducts(since: Int, completion: @escaping (Result<ProductsRoot>) -> ())
 }
 
 struct ProductsService: ProductsServiceType {
     
-    func fetchProducts(since: Int = 1, completion: @escaping (Result<Root>) -> ()) {
+    func fetchProducts(since: Int = 1, completion: @escaping (Result<ProductsRoot>) -> ()) {
         
         let api = "\(API.baseURL)" + "\(API.getProducts)" + "\(since)"
         Alamofire
@@ -35,7 +25,7 @@ struct ProductsService: ProductsServiceType {
                 switch response.result {
                 case .success(let value) :
                     do {
-                        let decodableValue = try JSONDecoder().decode(Root.self, from: value)
+                        let decodableValue = try JSONDecoder().decode(ProductsRoot.self, from: value)
                         completion(Result.success(decodableValue))
 //                        print(decodableValue)
                     } catch {

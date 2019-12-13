@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct Root: Decodable {
+struct ProductsRoot: Decodable {
     
-    let body: [Product]
+    let body: [Products]
     
     enum CodingKeys: String, CodingKey {
         case body
@@ -18,7 +18,7 @@ struct Root: Decodable {
     
 }
 
-struct Product: Decodable {
+struct Products: Decodable {
     
     let thumbnail: String
     let id: Int
