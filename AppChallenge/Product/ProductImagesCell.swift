@@ -36,7 +36,7 @@ class ProductImagesCell: UITableViewCell {
 //        self.contentView.layer.maskedCorners = []
         //        self.setupUIDesign()
         
-        setupUIComponents()
+        self.setupUIComponents()
     }
     
     func setupUIComponents() {

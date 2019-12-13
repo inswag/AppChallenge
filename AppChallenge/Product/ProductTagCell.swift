@@ -26,7 +26,7 @@ class ProductTagCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont(name: "NotoSansCJKkr-Black", size: 40.0)
         label.text = "ProductName"
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         label.textColor = UIColor.rgb(r: 20, g: 20, b: 40)
         return label
     }()
@@ -78,7 +78,7 @@ class ProductTagCell: UITableViewCell {
             m.leading.equalToSuperview().offset(24)
             m.trailing.equalToSuperview().offset(-24)
             // Intrinsic Content Size
-            m.height.equalTo(48)
+//            m.height.equalTo(48)
         }
         
         priceNameTitle.snp.makeConstraints { (m) in
@@ -93,6 +93,7 @@ class ProductTagCell: UITableViewCell {
             m.top.equalTo(self.priceNameTitle.snp.bottom).offset(32)
             m.leading.equalToSuperview().offset(24)
             m.trailing.equalToSuperview().offset(-24)
+            m.bottom.equalToSuperview()
             m.height.equalTo(2)
         }
     }

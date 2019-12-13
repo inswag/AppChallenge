@@ -52,7 +52,7 @@ class ProductsController: UIViewController {
     
     fileprivate func setupNavi() {
         self.navigationItem.titleView = storefrontImageView
-//        self.navigationController?.navigationBar.setValue(false, forKey: "hidesShadow")
+        
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         self.navigationController?.navigationBar.isTranslucent = false
         

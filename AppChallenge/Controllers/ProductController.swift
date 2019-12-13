@@ -35,21 +35,34 @@ class ProductController: UIViewController {
         return btn
     }()
     
+    // Button Property
+    lazy var closeButton: UIButton = {
+        let btn = UIButton()
+        let btnImg = UIImage(named: "baseline_close_white")
+        btn.setImage(btnImg, for: .normal)
+        btn.backgroundColor = UIColor.rgb(r: 24, g: 24, b: 40, a: 0.16)
+        btn.addTarget(self, action: #selector(actionClose), for: .touchUpInside)
+        btn.layer.cornerRadius = 20
+        return btn
+    }()
+    
+    @objc func actionClose() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: View Did Load
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupTableView()
+        self.setupUIComponents()
         
-        self.view.addSubview(self.purchaseButton)
-        self.purchaseButton.snp.makeConstraints { (m) in
-            m.leading.equalToSuperview().offset(42)
-            m.trailing.equalToSuperview().offset(-42)
-            m.bottom.equalToSuperview().offset(-30)
-            m.height.equalTo(52)
-        }
-        
+        // Network
         self.fetchSelectedProduct(productId: self.productId)
 //        print(self.fetchedSelectedProduct[0].seller)
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,21 +72,42 @@ class ProductController: UIViewController {
         }
     }
     
+    fileprivate func setupUIComponents() {
+        [purchaseButton, closeButton].forEach { self.view.addSubview($0) }
+        self.purchaseButton.snp.makeConstraints { (m) in
+            m.leading.equalToSuperview().offset(42)
+            m.trailing.equalToSuperview().offset(-42)
+            m.bottom.equalToSuperview().offset(-30)
+            m.height.equalTo(52)
+        }
+        
+        self.closeButton.snp.makeConstraints { (m) in
+            m.top.equalTo(self.tableView.snp.top).offset(16)
+            m.trailing.equalTo(self.tableView.snp.trailing).offset(-16)
+            m.width.equalTo(40)
+            m.height.equalTo(40)
+        }
+    }
+    
     fileprivate func setupTableView() {
         self.view.backgroundColor = .black
         self.view.addSubview(tableView)
-        
+    
         self.tableView.snp.makeConstraints { (m) in
             m.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
             m.leading.equalToSuperview()
             m.trailing.equalToSuperview()
             m.bottom.equalToSuperview()
         }
-        self.tableView.backgroundColor = .black
         
+        self.tableView.backgroundColor = .black
+        self.tableView.separatorStyle = .none
         self.tableView.showsVerticalScrollIndicator = false
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.estimatedRowHeight = 400
 
         self.tableView.register(ProductImagesCell.self, forCellReuseIdentifier: cellId)
         self.tableView.register(ProductTagCell.self, forCellReuseIdentifier: cellId2)
@@ -129,7 +163,7 @@ extension ProductController: UITableViewDataSource {
                 cell.priceNameTitle.attributedText = attributedTitle
                 cell.priceNameTitle.textAlignment = .left
             } else {
-                let attributedTitle = NSMutableAttributedString(string: "\(self.fetchedSelectedProduct.first?.discountRate ?? "")  ",
+                let attributedTitle = NSMutableAttributedString(string: "-\(self.fetchedSelectedProduct.first?.discountRate ?? "")  ",
                                                                 attributes: [NSAttributedString.Key.font: UIFont(name: "NotoSansCJKkr-Black", size: 20.0)!,
                                                                              NSAttributedString.Key.foregroundColor: UIColor.rgb(r: 255, g: 88, b: 108)])
                 attributedTitle.append(NSAttributedString(string: "\(self.fetchedSelectedProduct.first?.discountCost ?? "")  ",
@@ -137,7 +171,9 @@ extension ProductController: UITableViewDataSource {
                                                                        NSAttributedString.Key.foregroundColor: UIColor.rgb(r: 20, g: 20, b: 40)]))
                 attributedTitle.append(NSAttributedString(string: "\(self.fetchedSelectedProduct.first?.cost ?? "")",
                                                           attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 20.0)!,
-                                                                       NSAttributedString.Key.foregroundColor: UIColor.rgb(r: 171, g: 171, b: 196)]))
+                                                                       NSAttributedString.Key.foregroundColor: UIColor.rgb(r: 171, g: 171, b: 196),
+                                                                       NSAttributedString.Key.baselineOffset: 0,
+                                                                       NSAttributedString.Key.strikethroughStyle: 1]))
                 cell.priceNameTitle.attributedText = attributedTitle
                 cell.priceNameTitle.textAlignment = .left
             }
@@ -147,7 +183,8 @@ extension ProductController: UITableViewDataSource {
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellId3", for: indexPath) as! ProductDescriptionCell
-            cell.backgroundColor = .orange
+            cell.backgroundColor = .white
+            cell.productDescriptionTitle.text = self.fetchedSelectedProduct.first?.description
             return cell
         default:
             print("indexPath Error")
@@ -164,9 +201,13 @@ extension ProductController: UITableViewDelegate {
         switch indexPath.item {
         case 0:
             return self.view.frame.width
+        case 1:
+            return UITableView.automaticDimension
         default:
-            return 200
+            return UITableView.automaticDimension
         }
     }
+    
+    
     
 }

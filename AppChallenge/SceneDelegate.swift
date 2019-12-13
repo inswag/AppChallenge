@@ -23,7 +23,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             let productList = ProductsController()
             let naviController = UINavigationController(rootViewController: productList)
-            
             window.rootViewController = naviController
             self.window = window
             window.makeKeyAndVisible()
