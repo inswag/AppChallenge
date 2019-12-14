@@ -25,7 +25,7 @@ class ProductController: UIViewController {
     let tableView = UITableView()
     
     // purchase Property
-    let purchaseButton: UIButton = {
+    lazy var purchaseButton: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = UIColor.rgb(r: 255, g: 88, b: 108)
         btn.setTitleColor(UIColor.white, for: .normal)
@@ -51,7 +51,7 @@ class ProductController: UIViewController {
     }
     
     // MARK: View Did Load
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,11 +66,17 @@ class ProductController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
+        self.purchaseButton.frame = CGRect(x: 0, y: 0, width: 60, height: 50)
         UIView.animate(withDuration: 2.0) {
-            self.purchaseButton.center.y -= self.view.bounds.height
+//            self.purchaseButton.frame = CGRect(x: 0, y: 0, width: 60, height: 50)
+            self.purchaseButton.layoutIfNeeded()
+//            self.purchaseButton.center.y -= self.view.bounds.height
+//            self.purchaseButton.center.y = 0
         }
     }
+    
+     
     
     fileprivate func setupUIComponents() {
         [purchaseButton, closeButton].forEach { self.view.addSubview($0) }
@@ -109,7 +115,7 @@ class ProductController: UIViewController {
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 400
 
-        self.tableView.register(ProductImagesCell.self, forCellReuseIdentifier: cellId)
+        self.tableView.register(ProductImageCell.self, forCellReuseIdentifier: cellId)
         self.tableView.register(ProductTagCell.self, forCellReuseIdentifier: cellId2)
         self.tableView.register(ProductDescriptionCell.self, forCellReuseIdentifier: cellId3)
     }
@@ -144,16 +150,17 @@ extension ProductController: UITableViewDataSource {
         
         switch indexPath.item {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! ProductImagesCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! ProductImageCell
             cell.backgroundColor = .black
+            if let thumbnailList = self.fetchedSelectedProduct.first?.thumbnailList320 {
+                cell.configure(content: thumbnailList)
+            }
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellId2", for: indexPath) as! ProductTagCell
             cell.backgroundColor = .white
-            
             cell.sellerNameTitle.text = self.fetchedSelectedProduct.first?.seller
             cell.productNameTitle.text = self.fetchedSelectedProduct.first?.title
-            
             
             // 할인이 있는 경우와 없는 경우를 따로 처리
             if self.fetchedSelectedProduct.first?.discountRate == nil {
@@ -177,9 +184,6 @@ extension ProductController: UITableViewDataSource {
                 cell.priceNameTitle.attributedText = attributedTitle
                 cell.priceNameTitle.textAlignment = .left
             }
-            
-            
-            
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "cellId3", for: indexPath) as! ProductDescriptionCell
@@ -207,7 +211,5 @@ extension ProductController: UITableViewDelegate {
             return UITableView.automaticDimension
         }
     }
-    
-    
     
 }

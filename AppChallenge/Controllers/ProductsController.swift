@@ -55,7 +55,7 @@ class ProductsController: UIViewController {
         
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         self.navigationController?.navigationBar.isTranslucent = false
-        
+        self.navigationController?.navigationBar.shadowColor = UIColor.black
     }
     
     fileprivate func setupCollectionView() {
@@ -157,7 +157,7 @@ extension ProductsController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         let width: CGFloat = self.view.frame.width
-        let height: CGFloat = 200
+        let height: CGFloat = 20
         return CGSize(width: width, height: height)
     }
     
