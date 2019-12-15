@@ -1,5 +1,5 @@
 //
-//  ProductListCell.swift
+//  ProductsCell.swift
 //  AppChallenge
 //
 //  Created by 박인수 on 10/12/2019.
@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import Kingfisher
 import SnapKit
 
-class ProductListCell: UICollectionViewCell {
+class ProductsCell: UICollectionViewCell {
     
     let photoImageView: UIImageView = {
         let iv = UIImageView()
@@ -45,6 +46,13 @@ class ProductListCell: UICollectionViewCell {
         setupUIComponents()
     }
     
+    func configure(imageUrl: String, productName: String, seller: String) {
+        let imageUrl = URL(string: imageUrl)!
+        self.photoImageView.kf.setImage(with: imageUrl)
+        self.productNameTitle.text = productName
+        self.sellerNameTitle.text = seller
+    }
+    
     func setupUIComponents() {
         [photoImageView, productNameTitle, sellerNameTitle].forEach { self.contentView.addSubview($0) }
         
@@ -59,14 +67,12 @@ class ProductListCell: UICollectionViewCell {
             m.top.equalTo(self.photoImageView.snp.bottom).offset(4)
             m.leading.equalTo(self.contentView.safeAreaLayoutGuide.snp.leading).offset(8)
             m.trailing.equalTo(self.contentView.safeAreaLayoutGuide.snp.trailing).offset(-8)
-//            m.height.equalTo(40)
         }
         
         sellerNameTitle.snp.makeConstraints { (m) in
             m.top.equalTo(self.productNameTitle.snp.bottom)
             m.leading.equalTo(self.contentView.safeAreaLayoutGuide.snp.leading).offset(8)
             m.trailing.equalTo(self.contentView.safeAreaLayoutGuide.snp.trailing).offset(-8)
-//            m.height.equalTo(20)
         }
     }
     

@@ -27,13 +27,7 @@ class ProductImageCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: String(describing: ProductController.self))
 
-        layer.cornerRadius = 30
-        clipsToBounds = true
-        // Top Left Corner: .layerMinXMinYCorner
-        // Top Right Corner: .layerMaxXMinYCorner
-        // Bottom Left Corner: .layerMinXMaxYCorner
-        // Bottom Right Corner: .layerMaxXMaxYCorner
-        layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
         
         self.setupUIComponents()
     }
@@ -48,6 +42,12 @@ class ProductImageCell: UITableViewCell {
     }()
     
     func setupUIComponents() {
+        backgroundColor = .black
+        selectionStyle = .none
+        layer.cornerRadius = 30
+        clipsToBounds = true
+        layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        
         [collectionView, progressView].forEach { self.addSubview($0) }
         self.collectionView.backgroundColor = .black
         self.collectionView.isPagingEnabled = true

@@ -17,11 +17,6 @@ class ProductController: UIViewController {
     let productService: ProductServiceType = ProductService()
     
     // Tableview Properties
-    private let cellId = "cellId"
-    private let cellId2 = "cellId2"
-    private let cellId3 = "cellId3"
-    private let headerId = "headerId"
-    private let footerId = "footerId"
     let tableView = UITableView()
     
     // purchase Property
@@ -51,18 +46,14 @@ class ProductController: UIViewController {
     }
     
     // MARK: View Did Load
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        // UI
         self.setupTableView()
         self.setupUIComponents()
         
         // Network
         self.fetchSelectedProduct(productId: self.productId)
-//        print(self.fetchedSelectedProduct[0].seller)
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,16 +102,10 @@ class ProductController: UIViewController {
         self.tableView.showsVerticalScrollIndicator = false
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        
-        self.tableView.rowHeight = UITableView.automaticDimension
-        self.tableView.estimatedRowHeight = 400
-
-        self.tableView.register(ProductImageCell.self, forCellReuseIdentifier: cellId)
-        self.tableView.register(ProductTagCell.self, forCellReuseIdentifier: cellId2)
-        self.tableView.register(ProductDescriptionCell.self, forCellReuseIdentifier: cellId3)
+        self.tableView.register(ProductImageCell.self, forCellReuseIdentifier: String(describing: ProductImageCell.self))
+        self.tableView.register(ProductTagCell.self, forCellReuseIdentifier: String(describing: ProductTagCell.self))
+        self.tableView.register(ProductDescriptionCell.self, forCellReuseIdentifier: String(describing: ProductDescriptionCell.self))
     }
-    
-    
     
     // MARK:- Networks Methods
     fileprivate func fetchSelectedProduct(productId: Int) {
@@ -140,6 +125,8 @@ class ProductController: UIViewController {
     
 }
 
+
+
 extension ProductController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -150,50 +137,29 @@ extension ProductController: UITableViewDataSource {
         
         switch indexPath.item {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! ProductImageCell
-            cell.backgroundColor = .black
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductImageCell.self), for: indexPath) as! ProductImageCell
             if let thumbnailList = self.fetchedSelectedProduct.first?.thumbnailList320 {
                 cell.configure(content: thumbnailList)
             }
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellId2", for: indexPath) as! ProductTagCell
-            cell.backgroundColor = .white
-            cell.sellerNameTitle.text = self.fetchedSelectedProduct.first?.seller
-            cell.productNameTitle.text = self.fetchedSelectedProduct.first?.title
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductTagCell.self), for: indexPath) as! ProductTagCell
             
-            // 할인이 있는 경우와 없는 경우를 따로 처리
-            if self.fetchedSelectedProduct.first?.discountRate == nil {
-                let attributedTitle = NSMutableAttributedString(string: "\(self.fetchedSelectedProduct.first?.cost ?? "")",
-                                                                attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 20.0)!,
-                                                                             NSAttributedString.Key.foregroundColor: UIColor.rgb(r: 20, g: 20, b: 40)])
-                cell.priceNameTitle.attributedText = attributedTitle
-                cell.priceNameTitle.textAlignment = .left
-            } else {
-                let attributedTitle = NSMutableAttributedString(string: "-\(self.fetchedSelectedProduct.first?.discountRate ?? "")  ",
-                                                                attributes: [NSAttributedString.Key.font: UIFont(name: "NotoSansCJKkr-Black", size: 20.0)!,
-                                                                             NSAttributedString.Key.foregroundColor: UIColor.rgb(r: 255, g: 88, b: 108)])
-                attributedTitle.append(NSAttributedString(string: "\(self.fetchedSelectedProduct.first?.discountCost ?? "")  ",
-                                                          attributes: [NSAttributedString.Key.font: UIFont(name: "NotoSansCJKkr-Black", size: 20.0)!,
-                                                                       NSAttributedString.Key.foregroundColor: UIColor.rgb(r: 20, g: 20, b: 40)]))
-                attributedTitle.append(NSAttributedString(string: "\(self.fetchedSelectedProduct.first?.cost ?? "")",
-                                                          attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 20.0)!,
-                                                                       NSAttributedString.Key.foregroundColor: UIColor.rgb(r: 171, g: 171, b: 196),
-                                                                       NSAttributedString.Key.baselineOffset: 0,
-                                                                       NSAttributedString.Key.strikethroughStyle: 1]))
-                cell.priceNameTitle.attributedText = attributedTitle
-                cell.priceNameTitle.textAlignment = .left
-            }
+            cell.configure(seller: self.fetchedSelectedProduct.first?.seller ?? "",
+                           title: self.fetchedSelectedProduct.first?.title ?? "",
+                           discountRate: self.fetchedSelectedProduct.first?.discountRate,
+                           discountCost: self.fetchedSelectedProduct.first?.discountCost,
+                           cost: self.fetchedSelectedProduct.first?.cost ?? "")
             return cell
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cellId3", for: indexPath) as! ProductDescriptionCell
-            cell.backgroundColor = .white
-            cell.productDescriptionTitle.text = self.fetchedSelectedProduct.first?.description
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductDescriptionCell.self), for: indexPath) as! ProductDescriptionCell
+            cell.configure(description: self.fetchedSelectedProduct.first?.description ?? "")
             return cell
         default:
             print("indexPath Error")
         }
         return UITableViewCell()
+        
     }
     
 
@@ -205,8 +171,6 @@ extension ProductController: UITableViewDelegate {
         switch indexPath.item {
         case 0:
             return self.view.frame.width
-        case 1:
-            return UITableView.automaticDimension
         default:
             return UITableView.automaticDimension
         }

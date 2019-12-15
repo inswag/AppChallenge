@@ -20,6 +20,11 @@ class ProductImagesCell: UICollectionViewCell {
         return imgView
     }()
     
+    let scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        return scroll
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUIComponents()
@@ -28,16 +33,31 @@ class ProductImagesCell: UICollectionViewCell {
     func configure(content: String) {
         let urlString = URL(string: content)
         self.imageView.kf.setImage(with: urlString)
+        
+//        self.scrollView.contentSize
     }
     
     func setupUIComponents() {
+        self.contentView.addSubview(scrollView)
+        self.scrollView.snp.makeConstraints { (m) in
+            m.top.equalToSuperview()
+            m.leading.equalToSuperview()
+            m.trailing.equalToSuperview()
+            m.bottom.equalToSuperview()
+        }
+        
         self.contentView.addSubview(imageView)
         self.imageView.snp.makeConstraints { (m) in
-            m.top.equalTo(self.contentView.snp.top)
-            m.leading.equalTo(self.contentView.snp.leading)
-            m.trailing.equalTo(self.contentView.snp.trailing)
-            m.bottom.equalTo(self.contentView.snp.bottom)
+            m.top.equalToSuperview()
+            m.leading.equalToSuperview()
+            m.trailing.equalToSuperview()
+            m.bottom.equalToSuperview()
+//            m.top.equalTo(self.scrollView.snp.top)
+//            m.leading.equalTo(self.scrollView.snp.leading)
+//            m.trailing.equalTo(self.scrollView.snp.trailing)
+//            m.bottom.equalTo(self.scrollView.snp.bottom)
         }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

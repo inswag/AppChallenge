@@ -45,12 +45,19 @@ class ProductDescriptionCell: UITableViewCell {
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: cellID)
+        super.init(style: .default, reuseIdentifier: String(describing: ProductController.self))
         
         self.setupUIComponents()
     }
     
+    func configure(description: String) {
+        self.productDescriptionTitle.text = description
+    }
+    
     func setupUIComponents() {
+        self.backgroundColor = .white
+        self.selectionStyle = .none
+        
         [productDescriptionTitle, legalDescriptionView].forEach {
             self.contentView.addSubview($0)
         }

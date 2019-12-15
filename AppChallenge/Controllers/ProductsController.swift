@@ -18,10 +18,6 @@ class ProductsController: UIViewController {
     var fetchedProducts: [Products] = []
     
     // CollectionView Property
-    private let cellId = "cellId"
-    private let headerId = "headerId"
-    private let footerId = "footerId"
-    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -55,7 +51,7 @@ class ProductsController: UIViewController {
         
         self.navigationController?.navigationBar.barTintColor = UIColor.white
         self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.shadowColor = UIColor.black
+//        self.navigationController?.navigationBar.shadowColor = UIColor.black
     }
     
     fileprivate func setupCollectionView() {
@@ -63,8 +59,8 @@ class ProductsController: UIViewController {
         self.collectionView.showsVerticalScrollIndicator = false
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
-        self.collectionView.register(ProductListCell.self, forCellWithReuseIdentifier: cellId)
-        self.collectionView.register(ProductListFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: footerId)
+        self.collectionView.register(ProductsCell.self, forCellWithReuseIdentifier: String(describing: ProductsCell.self))
+        self.collectionView.register(ProductsFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: ProductsFooter.self))
     }
     
     fileprivate func setupUIComponents() {
@@ -77,12 +73,8 @@ class ProductsController: UIViewController {
         }
     }
     
-    
-    
-    
     // MARK:- Networks Methods
-    fileprivate func fetchProducts(since: Int = 1) {
-        
+    fileprivate func fetchProducts(since: Int = 1) { 
         productsService.fetchProducts(since: since) { (result) in
             switch result {
             case .success(let value):
@@ -107,15 +99,10 @@ extension ProductsController: UICollectionViewDataSource {
     
     // Handle Collection View Cell For Item AT
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ProductListCell
-        cell.productNameTitle.text = self.fetchedProducts[indexPath.row].title
-        cell.sellerNameTitle.text = self.fetchedProducts[indexPath.row].seller
-        
-        let imagePath = self.fetchedProducts[indexPath.row].thumbnail
-        let imageUrl = URL(string: imagePath)!
-        cell.photoImageView.kf.setImage(with: imageUrl)
-
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProductsCell.self), for: indexPath) as! ProductsCell
+        cell.configure(imageUrl: self.fetchedProducts[indexPath.row].thumbnail,
+                       productName: self.fetchedProducts[indexPath.row].title,
+                       seller: self.fetchedProducts[indexPath.row].seller)
         return cell
     }
     
@@ -124,7 +111,7 @@ extension ProductsController: UICollectionViewDataSource {
         
         switch kind {
         case UICollectionView.elementKindSectionFooter:
-            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: footerId, for: indexPath)
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: ProductsFooter.self), for: indexPath)
             return footer
         default:
             return UICollectionReusableView()
@@ -141,7 +128,6 @@ extension ProductsController: UICollectionViewDelegateFlowLayout {
         let bothSideEdgeInset: CGFloat = 12 * 2
         let interItemSpacing: CGFloat = 7
         let width: CGFloat = (self.view.frame.width - interItemSpacing - bothSideEdgeInset) / 2
-        
         let imgViewHeight: CGFloat = 172
         let Padding: CGFloat = 4
         let productTitleHeight: CGFloat = 40

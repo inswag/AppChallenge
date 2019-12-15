@@ -58,11 +58,42 @@ class ProductTagCell: UITableViewCell {
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: cellID)
+        super.init(style: .default, reuseIdentifier: String(describing: ProductController.self))
         self.setupUIComponents()
     }
     
+    func configure(seller: String, title: String, discountRate: String?, discountCost: String?, cost: String) {
+        self.sellerNameTitle.text = seller
+        self.productNameTitle.text = title
+        
+        // 할인이 있는 경우와 없는 경우를 따로 처리
+        if discountRate == nil {
+            let attributedTitle = NSMutableAttributedString(string: "\(cost)",
+                                                            attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 20.0)!,
+                                                                         NSAttributedString.Key.foregroundColor: UIColor.rgb(r: 20, g: 20, b: 40)])
+            self.priceNameTitle.attributedText = attributedTitle
+            self.priceNameTitle.textAlignment = .left
+        } else {
+            let attributedTitle = NSMutableAttributedString(string: "-\(discountRate ?? "")  ",
+                                                            attributes: [NSAttributedString.Key.font: UIFont(name: "NotoSansCJKkr-Black", size: 20.0)!,
+                                                                         NSAttributedString.Key.foregroundColor: UIColor.rgb(r: 255, g: 88, b: 108)])
+            attributedTitle.append(NSAttributedString(string: "\(discountCost ?? "")  ",
+                                                      attributes: [NSAttributedString.Key.font: UIFont(name: "NotoSansCJKkr-Black", size: 20.0)!,
+                                                                   NSAttributedString.Key.foregroundColor: UIColor.rgb(r: 20, g: 20, b: 40)]))
+            attributedTitle.append(NSAttributedString(string: "\(cost)",
+                                                      attributes: [NSAttributedString.Key.font: UIFont(name: "AppleSDGothicNeo-Bold", size: 20.0)!,
+                                                                   NSAttributedString.Key.foregroundColor: UIColor.rgb(r: 171, g: 171, b: 196),
+                                                                   NSAttributedString.Key.baselineOffset: 0,
+                                                                   NSAttributedString.Key.strikethroughStyle: 1]))
+            self.priceNameTitle.attributedText = attributedTitle
+            self.priceNameTitle.textAlignment = .left
+        }
+    }
+    
     func setupUIComponents() {
+        self.backgroundColor = .white
+        self.selectionStyle = .none
+        
         [sellerNameTitle, productNameTitle, priceNameTitle, seperatedView].forEach { self.contentView.addSubview($0) }
         
         sellerNameTitle.snp.makeConstraints { (m) in

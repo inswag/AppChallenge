@@ -1,5 +1,5 @@
 //
-//  ProductListFooterCell.swift
+//  ProductsFooter.swift
 //  AppChallenge
 //
 //  Created by 박인수 on 10/12/2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProductListFooter: UICollectionReusableView {
+class ProductsFooter: UICollectionReusableView {
     
     let imageView: UIImageView = {
         let imgView = UIImageView()
