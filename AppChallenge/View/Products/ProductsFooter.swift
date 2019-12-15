@@ -12,7 +12,6 @@ class ProductsFooter: UICollectionReusableView {
     
     let imageView: UIImageView = {
         let imgView = UIImageView()
-//        imgView.tintColor = UIColor.rgb(r: 171, g: 171, b: 196)
         imgView.image = UIImage(named: "baseline_navigation_black")
         return imgView
     }()

@@ -73,27 +73,38 @@ class ProductsController: UIViewController {
         }
     }
     
+    var since: Int = 2
+    var count: Int = 50
+    
     // MARK:- Networks Methods
     fileprivate func fetchProducts(since: Int = 1) { 
         productsService.fetchProducts(since: since) { (result) in
             switch result {
             case .success(let value):
-                self.fetchedProducts = value.body
+                value.body.forEach {
+                    self.fetchedProducts.append($0)
+                }
                 self.collectionView.reloadData()
-                print(self.fetchedProducts)
             case .failure(let error):
                 print(error)
+                self.since = 0
             }
         }
-        
     }
     
+    fileprivate func paginateProducts() {
+        print("will Paginate User List!")
+        print("pageNumber: ", since)
+        fetchProducts(since: since)
+        since += 1
+    }
 }
 
 extension ProductsController: UICollectionViewDataSource {
     
     // Handle Collection View Number Of Items In Section
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("numberOfRowsInSection: \(fetchedProducts.count)")
         return self.fetchedProducts.count
     }
     
@@ -116,8 +127,12 @@ extension ProductsController: UICollectionViewDataSource {
         default:
             return UICollectionReusableView()
         }
-        
-        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == self.fetchedProducts.count - 1 {
+            self.paginateProducts()
+        }
     }
     
 }

@@ -20,10 +20,6 @@ class ProductImagesCell: UICollectionViewCell {
         return imgView
     }()
     
-    let scrollView: UIScrollView = {
-        let scroll = UIScrollView()
-        return scroll
-    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,14 +34,6 @@ class ProductImagesCell: UICollectionViewCell {
     }
     
     func setupUIComponents() {
-        self.contentView.addSubview(scrollView)
-        self.scrollView.snp.makeConstraints { (m) in
-            m.top.equalToSuperview()
-            m.leading.equalToSuperview()
-            m.trailing.equalToSuperview()
-            m.bottom.equalToSuperview()
-        }
-        
         self.contentView.addSubview(imageView)
         self.imageView.snp.makeConstraints { (m) in
             m.top.equalToSuperview()
