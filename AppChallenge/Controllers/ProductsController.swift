@@ -87,7 +87,8 @@ class ProductsController: UIViewController {
                 self.collectionView.reloadData()
             case .failure(let error):
                 print(error)
-                self.since = 0
+//                self.since = 0
+                
             }
         }
     }
@@ -122,7 +123,9 @@ extension ProductsController: UICollectionViewDataSource {
         
         switch kind {
         case UICollectionView.elementKindSectionFooter:
-            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: ProductsFooter.self), for: indexPath)
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: ProductsFooter.self), for: indexPath) as! ProductsFooter
+            
+            
             return footer
         default:
             return UICollectionReusableView()

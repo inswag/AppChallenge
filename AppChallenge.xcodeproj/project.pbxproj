@@ -17,7 +17,6 @@
 		F90D070023A22705002408A8 /* ProductDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90D06FF23A22705002408A8 /* ProductDescriptionCell.swift */; };
 		F90D070223A22719002408A8 /* ProductImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90D070123A22719002408A8 /* ProductImageCell.swift */; };
 		F918C18123A7250C002A11DA /* RotateAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F918C18023A7250C002A11DA /* RotateAnimation.swift */; };
-		F92A77C523A090C300033261 /* ProductCustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92A77C423A090C300033261 /* ProductCustomFlowLayout.swift */; };
 		F92A77C823A0BDD600033261 /* ProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92A77C723A0BDD600033261 /* ProductController.swift */; };
 		F94EA14C23A495FE00700755 /* ProductImagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EA14B23A495FE00700755 /* ProductImagesCell.swift */; };
 		F9785B9823A1DA2500DA3BBE /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9785B9723A1DA2500DA3BBE /* Products.swift */; };
@@ -28,7 +27,6 @@
 		F9F308E4239F7BCF002E6F11 /* ProductsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F308E3239F7BCF002E6F11 /* ProductsController.swift */; };
 		F9F308E9239F7BD4002E6F11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9F308E8239F7BD4002E6F11 /* Assets.xcassets */; };
 		F9F308EC239F7BD4002E6F11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9F308EA239F7BD4002E6F11 /* LaunchScreen.storyboard */; };
-		F9F308F6239F8620002E6F11 /* ProductListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F308F5239F8620002E6F11 /* ProductListHeader.swift */; };
 		F9F308F8239F862F002E6F11 /* ProductsFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F308F7239F862F002E6F11 /* ProductsFooter.swift */; };
 		F9F308FA239FAA5C002E6F11 /* ProductsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F308F9239FAA5C002E6F11 /* ProductsCell.swift */; };
 		F9F308FC239FAB51002E6F11 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F308FB239FAB51002E6F11 /* Tools.swift */; };
@@ -47,7 +45,6 @@
 		F90D06FF23A22705002408A8 /* ProductDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDescriptionCell.swift; sourceTree = "<group>"; };
 		F90D070123A22719002408A8 /* ProductImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageCell.swift; sourceTree = "<group>"; };
 		F918C18023A7250C002A11DA /* RotateAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateAnimation.swift; sourceTree = "<group>"; };
-		F92A77C423A090C300033261 /* ProductCustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCustomFlowLayout.swift; sourceTree = "<group>"; };
 		F92A77C723A0BDD600033261 /* ProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductController.swift; sourceTree = "<group>"; };
 		F94EA14B23A495FE00700755 /* ProductImagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImagesCell.swift; sourceTree = "<group>"; };
 		F9785B9723A1DA2500DA3BBE /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
@@ -60,7 +57,6 @@
 		F9F308E8239F7BD4002E6F11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F9F308EB239F7BD4002E6F11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F9F308ED239F7BD4002E6F11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F9F308F5239F8620002E6F11 /* ProductListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListHeader.swift; sourceTree = "<group>"; };
 		F9F308F7239F862F002E6F11 /* ProductsFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsFooter.swift; sourceTree = "<group>"; };
 		F9F308F9239FAA5C002E6F11 /* ProductsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsCell.swift; sourceTree = "<group>"; };
 		F9F308FB239FAB51002E6F11 /* Tools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
@@ -103,15 +99,6 @@
 				F9CDF30323A239CB00B5884B /* SFProText-Black.otf */,
 			);
 			path = Font;
-			sourceTree = "<group>";
-		};
-		F92A77C623A0B61B00033261 /* Not used */ = {
-			isa = PBXGroup;
-			children = (
-				F9F308F5239F8620002E6F11 /* ProductListHeader.swift */,
-				F92A77C423A090C300033261 /* ProductCustomFlowLayout.swift */,
-			);
-			path = "Not used";
 			sourceTree = "<group>";
 		};
 		F9785B9623A1D9E000DA3BBE /* Model */ = {
@@ -173,7 +160,6 @@
 			isa = PBXGroup;
 			children = (
 				F90D06F123A21723002408A8 /* Font */,
-				F92A77C623A0B61B00033261 /* Not used */,
 				F9F308DF239F7BCF002E6F11 /* AppDelegate.swift */,
 				F9F308E1239F7BCF002E6F11 /* SceneDelegate.swift */,
 				F9F308EA239F7BD4002E6F11 /* LaunchScreen.storyboard */,
@@ -352,9 +338,7 @@
 				F94EA14C23A495FE00700755 /* ProductImagesCell.swift in Sources */,
 				F9F308E2239F7BCF002E6F11 /* SceneDelegate.swift in Sources */,
 				F90D06FA23A21B07002408A8 /* ProductService.swift in Sources */,
-				F92A77C523A090C300033261 /* ProductCustomFlowLayout.swift in Sources */,
 				F92A77C823A0BDD600033261 /* ProductController.swift in Sources */,
-				F9F308F6239F8620002E6F11 /* ProductListHeader.swift in Sources */,
 				F9F308FC239FAB51002E6F11 /* Tools.swift in Sources */,
 				F90D070023A22705002408A8 /* ProductDescriptionCell.swift in Sources */,
 				F90D06F823A21A56002408A8 /* API.swift in Sources */,

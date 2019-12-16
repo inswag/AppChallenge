@@ -20,6 +20,7 @@ class ProductsFooter: UICollectionReusableView {
         super.init(frame: frame)
         backgroundColor = .white
         self.setupUIComponents()
+        self.imageView.rotate()
     }
     
     required init?(coder: NSCoder) {
