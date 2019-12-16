@@ -16,6 +16,7 @@ class ProductsController: UIViewController {
     // Network Property
     let productsService: ProductsServiceType = ProductsService()
     var fetchedProducts: [Products] = []
+    var since: Int = 2
     
     // CollectionView Property
     lazy var collectionView: UICollectionView = {
@@ -73,8 +74,7 @@ class ProductsController: UIViewController {
         }
     }
     
-    var since: Int = 2
-    var count: Int = 50
+
     
     // MARK:- Networks Methods
     fileprivate func fetchProducts(since: Int = 1) { 
@@ -134,6 +134,7 @@ extension ProductsController: UICollectionViewDataSource {
             self.paginateProducts()
         }
     }
+    
     
 }
 

@@ -24,22 +24,18 @@ class ProductImageCell: UITableViewCell {
         return cv
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: String(describing: ProductController.self))
-
-        
-        
-        self.setupUIComponents()
-    }
     
-    let progressView: UIProgressView = {
+    lazy var progressView: UIProgressView = {
         let pgView = UIProgressView()
         pgView.progressTintColor = UIColor.white
         pgView.trackTintColor = UIColor.rgb(r: 0, g: 0, b: 10, a: 0.36)
-        pgView.progress = 0.0
-        pgView.setProgress(0.0, animated: true)
         return pgView
     }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: String(describing: ProductController.self))
+        self.setupUIComponents()
+    }
     
     func setupUIComponents() {
         backgroundColor = .black
@@ -77,12 +73,17 @@ class ProductImageCell: UITableViewCell {
         
     }
     
-    var imageSet: [String] = []
+    var imageSet: [String] = [] {
+        didSet {
+            self.progressView.setProgress(Float(1.0) / Float(self.imageSet.count), animated: false)
+            self.collectionView.reloadData()
+        }
+    }
     
     func configure(content: String) {
         self.imageSet = content.split(separator: "#").map { $0.replacingOccurrences(of: "320", with: "720") }
-        self.collectionView.reloadData()
     }
+    
 }
 
 extension ProductImageCell: UICollectionViewDataSource {
@@ -95,6 +96,10 @@ extension ProductImageCell: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProductImagesCell.self), for: indexPath) as! ProductImagesCell
         cell.configure(content: self.imageSet[indexPath.row])
         return cell
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        progressView.progress = Float((scrollView.contentOffset.x / collectionView.frame.width) + 1) / Float(self.imageSet.count)
     }
     
 }

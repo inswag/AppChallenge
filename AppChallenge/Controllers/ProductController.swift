@@ -59,16 +59,18 @@ class ProductController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.purchaseButton.snp.updateConstraints { (m) in
+            m.leading.equalToSuperview().offset(42)
+            m.trailing.equalToSuperview().offset(-42)
+            m.bottom.equalToSuperview().offset(-30)
+            m.height.equalTo(52)
+        }
+        
         UIView.animate(withDuration: 2.0) {
 //            self.purchaseButton.frame = CGRect(x: 0, y: 0, width: 60, height: 50)
-            self.purchaseButton.snp.updateConstraints { (m) in
-                m.leading.equalToSuperview().offset(42)
-                m.trailing.equalToSuperview().offset(-42)
-                m.bottom.equalToSuperview().offset(-30)
-                m.height.equalTo(52)
-            }
             
-            self.purchaseButton.layoutIfNeeded()
+            
+            self.view.layoutIfNeeded()
 //            self.purchaseButton.backgroundColor = .red
 //            self.purchaseButton.center.y -= self.view.bounds.height
 //            self.purchaseButton.center.y = 0
@@ -166,6 +168,7 @@ extension ProductController: UITableViewDataSource {
         return UITableViewCell()
         
     }
+    
     
 
 }
