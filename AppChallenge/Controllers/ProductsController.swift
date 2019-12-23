@@ -11,8 +11,14 @@ import Alamofire
 import Kingfisher
 import SnapKit
 
+protocol ProductsControllerDelegate: class {
+    func productsControllerDidSelectNumber(_ selectedProduct: Int)
+}
+
 class ProductsController: UIViewController {
 
+    weak var delegate: ProductsControllerDelegate?
+    
     // Network Property
     let productsService: ProductsServiceType = ProductsService()
     var fetchedProducts: [Products] = []
@@ -175,10 +181,14 @@ extension ProductsController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let productController = ProductController()
-        productController.modalPresentationStyle = .fullScreen
-        productController.productId = (indexPath.row + 1)
-        self.present(productController, animated: true)
+//        let productController = ProductController()
+//        productController.modalPresentationStyle = .fullScreen
+//        productController.productId = (indexPath.row + 1)
+//        self.present(productController, animated: true)
+        let productNumber = indexPath.row + 1
+        delegate?.productsControllerDidSelectNumber(productNumber)
+        
+    
     }
     
 }
